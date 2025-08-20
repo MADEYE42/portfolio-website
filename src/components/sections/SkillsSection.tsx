@@ -6,66 +6,66 @@ const SkillsSection = () => {
       title: "Programming Languages",
       icon: Code,
       skills: [
-        { name: "Python", level: 90 },
-        { name: "JavaScript", level: 85 },
-        { name: "C++", level: 80 },
-        { name: "Java", level: 75 },
-        { name: "TypeScript", level: 80 }
+        { name: "Python" },
+        { name: "JavaScript" },
+        { name: "C++" },
+        { name: "Java" },
+        { name: "TypeScript" }
       ]
     },
     {
       title: "Frontend Development",
       icon: Globe,
       skills: [
-        { name: "React", level: 88 },
-        { name: "Next.js", level: 82 },
-        { name: "HTML/CSS", level: 90 },
-        { name: "Tailwind CSS", level: 85 },
-        { name: "JavaScript ES6+", level: 87 }
+        { name: "React" },
+        { name: "Next.js" },
+        { name: "HTML/CSS" },
+        { name: "Tailwind CSS" },
+        { name: "JavaScript ES6+" }
       ]
     },
     {
       title: "Backend & Databases",
       icon: Database,
       skills: [
-        { name: "Node.js", level: 80 },
-        { name: "Firebase", level: 85 },
-        { name: "MongoDB", level: 75 },
-        { name: "SQL", level: 78 },
-        { name: "REST APIs", level: 82 }
+        { name: "Node.js" },
+        { name: "Firebase" },
+        { name: "MongoDB" },
+        { name: "SQL" },
+        { name: "REST APIs" }
       ]
     },
     {
       title: "AI/ML & Data Science",
       icon: Brain,
       skills: [
-        { name: "TensorFlow", level: 78 },
-        { name: "Machine Learning", level: 80 },
-        { name: "Data Analysis", level: 82 },
-        { name: "Python Libraries", level: 85 },
-        { name: "Computer Vision", level: 72 }
+        { name: "TensorFlow" },
+        { name: "Machine Learning" },
+        { name: "Data Analysis" },
+        { name: "Python Libraries" },
+        { name: "Computer Vision" }
       ]
     },
     {
       title: "Tools & Technologies",
       icon: Server,
       skills: [
-        { name: "Git & GitHub", level: 88 },
-        { name: "Docker", level: 70 },
-        { name: "AWS", level: 65 },
-        { name: "Linux", level: 75 },
-        { name: "VS Code", level: 90 }
+        { name: "Git & GitHub" },
+        { name: "Docker" },
+        { name: "AWS" },
+        { name: "Linux" },
+        { name: "VS Code" }
       ]
     },
     {
       title: "Design & Others",
       icon: Palette,
       skills: [
-        { name: "UI/UX Design", level: 75 },
-        { name: "Figma", level: 70 },
-        { name: "Project Management", level: 80 },
-        { name: "Problem Solving", level: 92 },
-        { name: "Team Leadership", level: 85 }
+        { name: "UI/UX Design" },
+        { name: "Figma" },
+        { name: "Project Management" },
+        { name: "Problem Solving" },
+        { name: "Team Leadership" }
       ]
     }
   ];
@@ -102,32 +102,21 @@ const SkillsSection = () => {
               </div>
 
               {/* Skills List */}
-              <div className="space-y-6">
+              <div className="grid grid-cols-2 gap-4">
                 {category.skills.map((skill, skillIndex) => (
                   <div 
                     key={skillIndex}
-                    className="animate-slide-in-left"
+                    className="flex items-center space-x-3 p-3 bg-white rounded-lg hover:shadow-md transition-all duration-200 animate-fade-in"
                     style={{ animationDelay: `${(categoryIndex * 0.1) + (skillIndex * 0.05)}s` }}
                   >
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-body font-medium text-primary">
-                        {skill.name}
-                      </span>
-                      <span className="text-caption text-muted font-medium">
-                        {skill.level}%
+                    <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                      <span className="text-xs font-semibold text-gray-600">
+                        {skill.name.charAt(0)}
                       </span>
                     </div>
-                    
-                    {/* Progress Bar */}
-                    <div className="skill-bar">
-                      <div 
-                        className="skill-progress"
-                        style={{ 
-                          width: `${skill.level}%`,
-                          animationDelay: `${(categoryIndex * 0.2) + (skillIndex * 0.1)}s`
-                        }}
-                      ></div>
-                    </div>
+                    <span className="text-body font-medium text-primary">
+                      {skill.name}
+                    </span>
                   </div>
                 ))}
               </div>

@@ -1,153 +1,71 @@
-import { Code, Database, Brain, Globe, Server, Palette } from "lucide-react";
+"use client"
 
-const SkillsSection = () => {
-  const skillCategories = [
-    {
-      title: "Programming Languages",
-      icon: Code,
-      skills: [
-        { name: "Python" },
-        { name: "JavaScript" },
-        { name: "C++" },
-        { name: "Java" },
-        { name: "TypeScript" }
-      ]
-    },
-    {
-      title: "Frontend Development",
-      icon: Globe,
-      skills: [
-        { name: "React" },
-        { name: "Next.js" },
-        { name: "HTML/CSS" },
-        { name: "Tailwind CSS" },
-        { name: "JavaScript ES6+" }
-      ]
-    },
-    {
-      title: "Backend & Databases",
-      icon: Database,
-      skills: [
-        { name: "Node.js" },
-        { name: "Firebase" },
-        { name: "MongoDB" },
-        { name: "SQL" },
-        { name: "REST APIs" }
-      ]
-    },
-    {
-      title: "AI/ML & Data Science",
-      icon: Brain,
-      skills: [
-        { name: "TensorFlow" },
-        { name: "Machine Learning" },
-        { name: "Data Analysis" },
-        { name: "Python Libraries" },
-        { name: "Computer Vision" }
-      ]
-    },
-    {
-      title: "Tools & Technologies",
-      icon: Server,
-      skills: [
-        { name: "Git & GitHub" },
-        { name: "Docker" },
-        { name: "AWS" },
-        { name: "Linux" },
-        { name: "VS Code" }
-      ]
-    },
-    {
-      title: "Design & Others",
-      icon: Palette,
-      skills: [
-        { name: "UI/UX Design" },
-        { name: "Figma" },
-        { name: "Project Management" },
-        { name: "Problem Solving" },
-        { name: "Team Leadership" }
-      ]
+import { useEffect, useRef, useState } from "react"
+
+const skills = [
+  { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+  { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+  { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+  { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
+  { name: "TensorFlow", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg" },
+  { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+  { name: "C++", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+  { name: "Firebase", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" },
+]
+
+export function SkillsSection() {
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.3 },
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
     }
-  ];
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <section className="section-padding bg-white">
-      <div className="container-custom">
-        {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-heading text-gradient mb-6">Technical Skills</h2>
-          <div className="w-16 h-1 bg-black mx-auto rounded-full mb-8"></div>
-          <p className="text-body-large text-secondary max-w-2xl mx-auto">
-            A comprehensive toolkit spanning full-stack development, AI/ML, 
-            and modern technologies to build scalable and innovative solutions.
-          </p>
-        </div>
+    <section ref={sectionRef} id="skills" className="py-20 px-4 bg-muted/30">
+      <div className="max-w-4xl mx-auto">
+        <div
+          className={`transition-all duration-800 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        >
+          <h2 className="text-4xl font-bold text-center mb-12">Technical Skills</h2>
 
-        {/* Skills Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <div 
-              key={categoryIndex}
-              className="surface-elevated rounded-2xl p-8 hover-lift animate-scale-in"
-              style={{ animationDelay: `${categoryIndex * 0.1}s` }}
-            >
-              {/* Category Header */}
-              <div className="flex items-center space-x-4 mb-8">
-                <div className="w-12 h-12 bg-black rounded-lg flex items-center justify-center">
-                  <category.icon className="w-6 h-6 text-white" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {skills.map((skill, index) => (
+              <div
+                key={skill.name}
+                className={`bg-background border rounded-lg p-6 text-center hover:shadow-lg transition-all duration-300 hover:scale-105 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+                }`}
+                style={{
+                  transitionDelay: `${index * 100}ms`,
+                }}
+              >
+                <div className="flex flex-col items-center space-y-3">
+                  <img
+                    src={skill.icon || "/placeholder.svg"}
+                    alt={`${skill.name} logo`}
+                    className="w-12 h-12 object-contain"
+                  />
+                  <span className="font-medium text-sm">{skill.name}</span>
                 </div>
-                <h3 className="text-lg font-semibold text-primary">
-                  {category.title}
-                </h3>
               </div>
-
-              {/* Skills List */}
-              <div className="grid grid-cols-2 gap-4">
-                {category.skills.map((skill, skillIndex) => (
-                  <div 
-                    key={skillIndex}
-                    className="flex items-center space-x-3 p-3 bg-white rounded-lg hover:shadow-md transition-all duration-200 animate-fade-in"
-                    style={{ animationDelay: `${(categoryIndex * 0.1) + (skillIndex * 0.05)}s` }}
-                  >
-                    <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
-                      <span className="text-xs font-semibold text-gray-600">
-                        {skill.name.charAt(0)}
-                      </span>
-                    </div>
-                    <span className="text-body font-medium text-primary">
-                      {skill.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Additional Skills Footer */}
-        <div className="mt-16 text-center animate-fade-in" style={{ animationDelay: '0.8s' }}>
-          <div className="surface-subtle rounded-2xl p-8 max-w-4xl mx-auto">
-            <h4 className="text-subheading text-primary mb-4">
-              Additional Expertise
-            </h4>
-            <div className="flex flex-wrap justify-center gap-3">
-              {[
-                "Agile Development", "DevOps", "Testing", "Code Review", 
-                "Documentation", "Mentoring", "Public Speaking", "Research"
-              ].map((skill, index) => (
-                <span 
-                  key={index}
-                  className="px-4 py-2 bg-white border border-gray-200 rounded-full text-body text-muted font-medium hover:bg-gray-50 transition-colors"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
+            ))}
           </div>
         </div>
       </div>
     </section>
-  );
-};
-
-export default SkillsSection;
+  )
+}

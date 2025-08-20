@@ -1,5 +1,5 @@
 import { Phone, Mail, Github, Linkedin } from "lucide-react";
-import profilePhoto from "@/assets/profile-photo.jpg";
+import profilePhoto from "@/assets/profile-photo.png";
 
 const HeroSection = () => {
   const contactLinks = [
@@ -7,7 +7,7 @@ const HeroSection = () => {
       icon: Phone, 
       href: "tel:+91XXXXXXXXXX", 
       label: "Phone",
-      text: "+91 XXXX-XXX-XXX"
+      text: "+91 99873 87639"
     },
     { 
       icon: Mail, 
